@@ -2,11 +2,13 @@
   "name": "opay",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/onifade-joshua/OPay.git",
+  "author": "onifade-joshua <onifadejoshua9@gmail.com>",
   "license": "MIT",
-  "proxy": "http://localhost:7001",
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.js"
+    "build": "parcel build ./src/index.js",
+    "deploy": "yarn build && surge ./dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
@@ -15,9 +17,9 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.16.0"
   },
   "devDependencies": {
     "buffer": "^5.5.0||^6.0.0",
