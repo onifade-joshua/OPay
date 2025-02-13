@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Logo from "../src/assets/opay-logo.jpg";
 import CBN from "../src/assets/cbn.jpg";
 import NDIC from "../src/assets/ndic.jpg";
