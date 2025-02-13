@@ -1,0 +1,27 @@
+{
+  "name": "opay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "proxy": "http://localhost:7001",
+  "scripts": {
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5"
+  },
+  "devDependencies": {
+    "buffer": "^5.5.0||^6.0.0",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  }
+}
