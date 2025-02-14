@@ -8,7 +8,7 @@ import CBN from "../src/assets/cbn.jpg";
 import NDIC from "../src/assets/ndic.jpg";
 import "./App.css";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:7001";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:7127";
 
 const App = () => {
   const [phoneNumber, setPhoneNumber] = useState("");

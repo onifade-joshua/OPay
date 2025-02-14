@@ -36,7 +36,7 @@ $879490e392fb927c$exports = new URL("ndic.f3eabccb.jpg", "file:" + __filename).t
 
 
 
-const $da11a1101b2a894a$var$API_URL = "https://localhost:7001";
+const $da11a1101b2a894a$var$API_URL = "https://localhost:7127";
 const $da11a1101b2a894a$var$App = ()=>{
     const [phoneNumber, setPhoneNumber] = (0, $ltMAx$react.useState)("");
     const [password, setPassword] = (0, $ltMAx$react.useState)("");
@@ -237,7 +237,7 @@ var $da11a1101b2a894a$export$2e2bcd8739ae039 = $da11a1101b2a894a$var$App;
 
 
 
-const $2372fbe6d8bd7284$var$API_URL = "https://localhost:7001";
+const $2372fbe6d8bd7284$var$API_URL = "https://localhost:7127";
 const $2372fbe6d8bd7284$var$Sign = ()=>{
     const [phoneNumber, setPhoneNumber] = (0, $ltMAx$react.useState)("");
     const [password, setPassword] = (0, $ltMAx$react.useState)("");
