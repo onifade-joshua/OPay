@@ -21,3 +21,6 @@ yarn-error.log*
 # Windows files
 Thumbs.db
 
+
+# Local Netlify folder
+.netlify
